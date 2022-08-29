@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "lib": [
+      "es2015"
+    ],
+    "rootDir": "src",
+    "outDir": "build"
+  },
+  "include": [
+    "src/*.ts",
+    "jest.global.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/__tests__",
+    "src/**/__fixtures__",
+    "src/**/__mocks__"
+  ]
+}
