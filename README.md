@@ -176,7 +176,7 @@ Results to the following AST
 ## License
 
 License [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)
-Copyright (c) 2022-present Ivan Zakharchanka
+Copyright (c) 2023-present Ivan Zakharchanka
 
 [npm-url]: https://www.npmjs.com/package/xast
 [downloads-image]: https://img.shields.io/npm/dw/xast.svg?cacheSeconds=300
