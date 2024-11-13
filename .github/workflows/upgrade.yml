@@ -8,67 +8,36 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Run CI/CD Pipeline
+        uses: zource-dev/action@v1
         with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/
+          node_version: '22.x'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          autoupdate: minor
+          username: Ivan Zakharchanka
+          email: 3axap4eHko@github.com
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          codecov_token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Environment log
-        id: env
-        run: |
-          node --version
-          yarn --version
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js 🛠️
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org/'
 
-      - name: Install dependecies
-        run: |
-          yarn install --frozen-lockfile
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+          version: 9
 
-      - name: Upgrade
-        id: updates
+      - name: Test published 🔩
         run: |
-          PENDING=$(yarn outdated --json|tail -1|jq '.data.body'|jq length)
-          echo "::set-output name=PENDING::$PENDING"
-          yarn upgrade
-          DONE=$(yarn outdated --json|tail -1|jq '.data.body'|jq length)
-          echo "::set-output name=DONE::$DONE"
+          pnpm init
+          pnpm add evnty
+        shell: bash
 
-      - name: Run build process
-        if: steps.updates.outputs.PENDING != steps.updates.outputs.DONE
-        run: |
-          yarn build
-
-      - name: Run tests
-        if: steps.updates.outputs.PENDING != steps.updates.outputs.DONE
-        run: |
-          yarn test
-
-      - name: Commit updates
-        if: steps.updates.outputs.PENDING != steps.updates.outputs.DONE
-        run: |
-          git config --global user.email "3axap4eHko@github.com"
-          git config --global user.name "Ivan Zakharchanka"
-          git add --all
-          git commit -am "autoupdate"
-          npm version patch
-
-      - name: Publish
-        if: steps.updates.outputs.PENDING != steps.updates.outputs.DONE
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish
-          git push
-          git push --tags
-
-      - name: Push updates
-        if: steps.updates.outputs.PENDING != steps.updates.outputs.DONE
-        run: |
-          git push
-          git push --tags

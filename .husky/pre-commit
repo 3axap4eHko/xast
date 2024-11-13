@@ -1,10 +1,8 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 STAGED=$(git diff --diff-filter=d --cached --name-only | grep -E '\.(ts)$' || true)
 if [ -z "$STAGED" ]; then
   echo "Skip linitng"
 else
   echo "Linting $STAGED"
-  yarn eslint --fix $STAGED && git add $STAGED
+  pnpm eslint --fix $STAGED && git add $STAGED
 fi
+
