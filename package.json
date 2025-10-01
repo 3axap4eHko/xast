@@ -33,7 +33,7 @@
   "homepage": "https://github.com/3axap4eHko/xast#readme",
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.18.7",
+    "@types/node": "^22.18.8",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "eslint": "^9.36.0",
@@ -42,7 +42,7 @@
     "semantic-release": "^24.2.9",
     "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "packageManager": "pnpm@9.15.9"
 }
