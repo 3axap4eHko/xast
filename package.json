@@ -1,6 +1,6 @@
 {
   "name": "xast",
-  "version": "0.1.288",
+  "version": "0.1.289",
   "description": "AST parsing library",
   "main": "build/index.js",
   "types": "build/index.d.ts",
