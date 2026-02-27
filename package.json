@@ -33,7 +33,7 @@
   "homepage": "https://github.com/3axap4eHko/xast#readme",
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.19.11",
+    "@types/node": "^22.19.13",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^9.39.3",
